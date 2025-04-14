@@ -70,7 +70,7 @@ jobs:
       VAR2: myjobvar2
       VAR3: myjobvar3
     outputs:
-      job3var: ${{steps.step2.outputs.job3var}}
+      job4var: ${{steps.step2.outputs.job4var}}
     steps:
 
       - run: |
@@ -86,7 +86,7 @@ jobs:
           VAR3: mystepvar3
       - name: "Save job var"
         id: step2
-        run: echo "job3var=${{env.VAR2}}" >> $GITHUB_OUTPUT
+        run: echo "job4var=${{env.VAR2}}" >> $GITHUB_OUTPUT
 
   job5:
     runs-on: ubuntu-latest
@@ -97,7 +97,7 @@ jobs:
       - env:
           myvar2: 64
         run: |
-          echo "${{env.myvar1}} + ${{env.myvar2}} = ${{github.events.inputs.optional}}"
-          echo ${{needs.job4outputs.job3var}}
+          echo "${{env.myvar1}} + ${{env.myvar2}} = ${{github.event.inputs.optional}}"
+          echo ${{needs.job4.outputs.job4var}}
           
       
